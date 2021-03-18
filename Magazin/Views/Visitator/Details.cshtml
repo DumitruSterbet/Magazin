@@ -1,0 +1,35 @@
+﻿
+@model Produs
+   
+@{
+    ViewData["Title"] = "Detalii Produs";
+}
+<div style="margin:100px;padding:10px;
+border:5px solid black;min-height:100px;padding:100px;border-radius:20px 20px; font-family: 'Sofia' ">
+    <div class="row mt-5 mt-5" style="color: blue;
+        min-height: 100px;
+        min-width: 100px">
+
+
+        @{ <div class="col-lg-16" style="color: indigo;
+        text-align: center;
+        min-height: 100px;
+        min-width: 100px
+">
+    <h2>  @Model.Name</h2>
+    @{string denumire = Model.Path + "" + Model.Img;}
+    <img class="img-thumbnail" src="@denumire" alt="@Model.Name" />
+    <p>Compania producator: @Model.Company</p>
+    <p>@Model.Desc</p>
+    <p style="color:black;padding:10px;font-size:30px;font-style:italic">
+        Pretul jocului : @Model.Price.ToString("c")
+    </p>
+    <p>
+        <a class="btn btn-warning" href="~/Visitator/Buy/@Model.Id"> Cumpara</a>
+        <a class="btn btn-warning" href="~/Visitator/Index"> Meniu</a>
+    </p>
+</div>
+        }
+
+    </div>
+</div>

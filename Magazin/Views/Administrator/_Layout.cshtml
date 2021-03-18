@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body class="bd-light" style="background-color: darkorange">
+
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">©Admin Mode</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="~/Administrator/Meniu_manager">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Administrator/Add">Adauga Produs</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="~/Administrator/Logs">Fisierul cu loguri</a>
+                </li>
+            </ul>
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Visitator/Logout">Log Out</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav><div style="margin-bottom:100px"></div>
+    <!--основной контент-->
+    <div class="container body-content" style="border: 5px solid black; border-radius: 15px;background-color: #333;">
+        @RenderBody()
+        <hr />
+
+    </div>
+    <footer class="text-center">
+        <p>© 2021 - GameStore</p>
+    </footer>
+</body>
+</html>

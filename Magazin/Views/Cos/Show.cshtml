@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Magazin.Models.Produs>
+
+@{
+    ViewData["Title"] = "Cos";
+}
+
+<div class="row mt-5 mt-2">
+
+    @{
+        foreach (var p in Model)
+        {
+            <div class="col-lg-4">
+                <h2>  @p.Name</h2>
+              
+
+               
+                <p>  Pretul jocului : @p.Price.ToString("c")</p>
+                <p>
+                   
+                    <a class="btn btn-warning" href="~/Cos/Delete/@p.Id"> Sterge</a>
+                </p>
+            </div>
+        }
+    }
+
+</div>

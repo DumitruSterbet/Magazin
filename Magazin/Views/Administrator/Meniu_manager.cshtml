@@ -1,0 +1,33 @@
+﻿@using Magazin.ViewModels
+@model ViewModel
+@{
+    ViewData["Title"] = "Meniu Manager";
+}
+<div style="background-color: #333;">
+    <div class="row mt-5 mt-2" style="color: white;background-color: #333;">
+
+        @{
+
+            foreach (var p in Model.viewProdus)
+            {
+
+                {
+
+                    <div class="col-lg-4">
+                        @{string denumire = p.Path + "" + p.Img;}
+                        <img class="img-thumbnail" src="@denumire" alt="@p.Name" />
+                        <h2>   @p.Name</h2>
+                        <p>Compania producator: @p.Company</p>
+                        <p>  @p.Price.ToString("c")</p>
+
+                        <p><a class="btn btn-warning" href="~/Administrator/Show/@p.Id"> Detalii</a></p>
+
+
+                    </div>
+
+                }
+            }
+        }
+
+    </div>
+</div>

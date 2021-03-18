@@ -1,0 +1,31 @@
+﻿@model List<Produs>
+@{
+    ViewData["Title"] = "Pagina De Baza";
+}
+<h1 style="text-align:center">Produsele favorite</h1>
+<div class="row mt-5 mt-2">
+    @{
+        foreach (var p in Model)
+        {
+        <div class="col-lg-4">
+            <h2>  @p.Name</h2>
+            @{string denumire = p.Path +""+ p.Img;}
+            <img class="img-thumbnail" src="@denumire" alt="@p.Name" />
+
+            <p>Compania producator: @p.Company</p>
+
+
+
+            @if (@p.Favourite)
+            {<h3> <i class="fas fa-heart"></i></h3>}
+            <p>  Pretul jocului : @p.Price.ToString("c")</p>
+            <p>
+                <a class="btn btn-warning" href="~/Visitator/Buy/@p.Id"> Cumpara</a>
+                <a class="btn btn-warning" href="~/Visitator/Details/@p.Id"> Detalii</a>
+            </p>
+        </div>
+        }
+    }
+
+</div>
+

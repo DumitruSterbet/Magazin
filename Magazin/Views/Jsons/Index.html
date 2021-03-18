@@ -1,0 +1,35 @@
+﻿<div ng-app="myApp" ng-controller="customersCtrl">
+    <h3 style="text-align:center">Cauta</h3>
+    <p style="text-align:center"><input type="text" ng-model="test"> </p>
+
+    <div class="row mt-5 mt-2">
+        <div class="col-lg-4" ng-repeat="x in myData | filter : test  ">
+            <h2>{{x.name }}</h2>
+            <img class="img-thumbnail" src="{{x.img}}" alt="{{x.name}} " />
+            <p>
+                Compania producator: {{x.company}}
+
+
+                <h3> <i ng-show="x.Favourite==true" class="fas fa-heart"></i></h3>
+
+            <p>  Pretul jocului : {{x.Price}} </p>
+            <p>
+                <a class="btn btn-warning" href="~/Visitator/Buy/{{x.Id}}"> Cumpara</a>
+                <a class="btn btn-warning" href="~/Visitator/Details/{{x.Id}}"> Detalii</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function ($scope, $http) {
+        $http.get("https://localhost:44399/api/jsons/").then(function (response) {
+            $scope.myData = response.data;
+
+        });
+    });
+</script>

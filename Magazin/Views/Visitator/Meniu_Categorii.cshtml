@@ -1,0 +1,31 @@
+﻿@using Magazin.ViewModels
+@model ViewModel
+@{
+    ViewData["Title"] = "Categorii";
+}
+
+
+<div class="row mt-5 mt-2">
+
+
+    @{ 
+
+    
+        foreach (var p in Model.viewCategory)
+        {
+            {
+
+        <div class="col-lg-4">
+            <img class="img-thumbnail" src="@p.Img" alt="@p.Name" />
+
+            <h1>  Denumirea categoriei : @p.Name</h1>
+            <p><a class="btn btn-warning" href="~/Visitator/Categorii/@p.Id">Categoria @p.Name</a></p>
+
+
+        </div>
+
+            }
+            }
+            }
+
+        </div>

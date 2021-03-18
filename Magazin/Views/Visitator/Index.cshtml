@@ -1,0 +1,83 @@
+﻿
+
+@{
+    ViewData["Title"] = "Catalogul produselor";
+}
+<head>
+
+    <title>Meniu principal</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="stel.css" />
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amatic SC' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+</head>
+
+<div class="text-center" ng-app="myApp" ng-controller="customersCtrl" style="font-family: 'Sofia'">
+    <p>
+    <h3 class="btn btn-warning" ng-click="find()">Cauta</h3></p>
+    <h3 class="btn btn-warning" ng-click="sortPret()" style="text-align:center">Sorteaza dupa pret</h3>
+    <div ng-show="Find">
+        
+        <p style="text-align:center"><br /><input type="text" ng-model="test" placeholder="Cauta"> </p>
+        <div class="row mt-5 mt-2">
+            <div class="col-lg-4" ng-repeat="x in myData | filter : {name :test}  ">
+                <h2>{{x.name }}</h2>
+                <img class="img-thumbnail" src="{{x.path+x.img}}" alt="{{x.name}} " />
+                <p>
+                    Compania producator: {{x.company}}
+
+
+                    <h3> <i ng-show="x.favourite==true" class="fas fa-heart"></i></h3>
+
+                <p>  Pretul jocului : {{x.price}}  </p>
+                <p>
+                    <a class="btn btn-warning" href="~/Cos/Add/{{x.id}}"> Cumpara</a>
+                    <a class="btn btn-warning" href="~/Visitator/Details/{{x.id}}"> Detalii</a>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="sortPret" ng-show="SortP">
+        <div class="row mt-5 mt-2">
+            <div class="col-lg-4" ng-repeat="x in myData | orderBy:'price'  ">
+                <h2>{{x.name }}</h2>
+                <img class="img-thumbnail" src="{{x.path+x.img}}" alt="{{x.name}} " />
+                <p>
+                    Compania producator: {{x.company}}
+
+
+                    <h3> <i ng-show="x.favourite==true" class="fas fa-heart"></i></h3>
+
+                <p>  Pretul jocului : {{x.price}}  </p>
+                <p>
+                    <a class="btn btn-warning" href="~/Visitator/Buy/{{x.id}}"> Cumpara</a>
+                    <a class="btn btn-warning" href="~/Visitator/Details/{{x.id}}"> Detalii</a>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function ($scope, $http) {
+        $http.get("https://localhost:44399/api/jsons/").then(function (response) {
+            $scope.myData = response.data;
+            $scope.SortP = false;
+            $scope.Find = true;
+            $scope.find = function () {
+                $scope.Find = !$scope.Find;
+                $scope.SortP = false;
+            }
+            $scope.sortPret = function () {
+                $scope.Find = false;
+                $scope.SortP = !$scope.SortP;
+            }
+        });
+    });
+</script>

@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Add produs nou";
+}
+<head>
+    <title>Meniu principal</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="stel.css" />
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amatic SC' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+</head>
+<h2 style="color:white" class="text-center">#Adauga produs nou</h2>
+<body class="bd-light" style="background-color: #333;">
+    <div style="border:5px solid black;border-radius:10px;max-width:600px;background-color:white;min-width:400px;margin-left:21%">
+    <form method="post" class="form-signin" style="width: 100%; max-width: 300px; padding: 15px; margin: 0 auto;"role="form" enctype="multipart/form-data">
+        <p> #Completeaza:</p>
+
+        <div class="text-center">
+                <label for="Name">#Denumirea</label>
+                <input type="text" class="form-control" style="border:3px solid black" name="Name" placeholder="" value="" required="">
+                <div class="invalid-feedback">
+                    Necesita denumire valida
+               
+            </div>
+        </div>
+        <div class="text-center">
+            
+                <label for="Company">#Compania </label>
+                <input type="text" class="form-control" style="border:3px solid black" name="Company" placeholder="" value="" required="">
+                <div class="invalid-feedback">
+                    Necesita o comapanie valida
+            </div>
+        </div>
+
+
+        <div class=" text-center">
+            <label for="Desc">#Descriere:</label>
+          
+                <input type="text" name="Desc" class="form-control" style="border:3px solid black" />
+          
+        </div>
+
+        <div class=" text-center">
+            <label for="Price" >#Pret :</label>
+           
+                <input type="number" name="Price" class="form-control" style="border:3px solid black" />
+           
+        </div>
+        <fieldset class="form-group text-center">
+            <div class="row">
+                <p class="col-form-label col-sm-2 pt-0">#Favorit</p>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Favourite" value="true">
+                        <label class="form-check-label" for="gridRadios1">
+                            True
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Favourite" value="false" checked>
+                        <label class="form-check-label" for="gridRadios2">
+                            False
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class=" text-center" ng-app="myApp" ng-controller="customersCtrl">
+           
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="categoryID">
+                    <option selected>#Categoria...</option>
+                    <option value="{{myData[0].id}}">{{myData[0].name}}</option>
+                    <option value="{{myData[0].id}}">{{myData[1].name}}</option>
+                    <option value="{{myData[0].id}}">{{myData[2].name}}</option>
+                </select>
+           
+        </div>
+        <div class="form-group text-center">
+            <label for="uploadedFile" >#Incarca imaginea</label>
+            
+                <input type="file" name="uploadedFile" class="form-control" style="border:3px solid black" />
+            
+        </div>
+
+        <div class="form-group text-center">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-warning" value="Trimite" />
+            </div></div>
+       
+    </form></div>
+</body>
+
+    <script>
+        var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("https://localhost:44399/api/jsonsCategory/").then(function (response) {
+                $scope.myData = response.data;
+                
+            });
+    });
+
+</script>

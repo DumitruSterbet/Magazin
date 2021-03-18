@@ -1,0 +1,19 @@
+﻿@model List<Log>
+@{
+    ViewData["Title"] = "Pagina cu Loguri";
+}
+<h1 style="text-align:center">Cifrele reprezinta Data cind au fost adaugate</h1>
+<div class="row mt-10 mt-10" >
+    @{
+        foreach (var p in Model)
+        {
+        <div class="col-lg-10" style="margin:10px; color:orangered;background-color: #333">
+            <h2>  @p.name</h2>
+
+            <p> @Html.ActionLink("Descarca", "DownloadFile", new { fileName = p.name })</p>
+
+        </div>
+        }
+    }
+
+</div>
