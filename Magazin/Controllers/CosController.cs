@@ -45,5 +45,26 @@ namespace Magazin.Controllers
             
             return RedirectToAction("Show", "Cos");
         }
+        [HttpGet]
+        public IActionResult Buy()
+        {
+            
+            return View();
+        }
+        [HttpPost]
+        public string Buy(Order order)
+        { 
+            order.ProdusId = 1;
+            List<Order> orders = new List<Order>();
+            foreach(var el in produse)
+            {
+                order.ProdusId = el.Id;
+                orders.Add(order);
+            }
+
+            db.Orders.AddRange(orders);
+            db.SaveChanges();
+            return "Multumesc, " + order.User + ", pentru cumparare!";
+        }
     }
 }

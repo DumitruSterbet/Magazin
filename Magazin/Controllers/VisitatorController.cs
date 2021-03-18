@@ -143,21 +143,6 @@ namespace Magazin.Controllers
         }
 
         // Metoda de inscriere a facturii in BD
-        [HttpGet]
-        public IActionResult Buy(int? id)
-        {
-            if (id == null) return RedirectToAction("Index");
-            ViewBag.ProdusId = id;
-            logger.LogInformation("Metoda Buy() a fost accesata");
-            return View();
-        }
-        [HttpPost]
-        public string Buy(Order order)
-        {  
-            db.Orders.Add(order);
-            db.SaveChanges();
-            logger.LogInformation("Cererea de cumparare a fost validata");
-            return "Multumesc, " + order.User + ", pentru cumparare!";
-        }
+       
     }
 }
