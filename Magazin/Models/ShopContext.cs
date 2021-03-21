@@ -11,6 +11,7 @@ namespace Magazin.Models
         public DbSet<Category>Categories { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Log> Logs { get; set; }
+        public DbSet<OrderProdus> OrdersProdus { get; set; }
        
 
         public ShopContext(DbContextOptions<ShopContext> options)

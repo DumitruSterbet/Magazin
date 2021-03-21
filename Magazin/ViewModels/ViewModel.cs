@@ -14,6 +14,7 @@ namespace Magazin.ViewModels
          public List<Admin> viewAdmin { get; set; }
         public List<Order> viewOrder { get; set; }
         public List<Log> viewLog { get; set; }
+        public List<OrderProdus> viewOrderProdus { get; set; }
       
     }
 }

@@ -4,12 +4,12 @@
     ViewData["Title"] = "Cos";
 }
 
-<div class="row mt-5 mt-2">
+<div class="row mt-12 mt-10" style="text-align:center">
 
     @{
         foreach (var p in Model)
         {
-            <div class="col-lg-4">
+            <div class="col-lg-10" style="background-color:dimgrey;color:yellow;border:5px solid black;">
                 <h2>  @p.Name</h2>
 
 
@@ -23,9 +23,11 @@
         }
     }
 
-    <p>
 
-        <a class="btn btn-warning" href="~/Cos/Buy"> Cumpara</a>
-    </p>
 
 </div>
+<div ><p>
+
+    <a class="btn btn-danger" style="margin:30px;" href="~/Cos/Buy"> Cumpara</a>
+</p></div>
+
