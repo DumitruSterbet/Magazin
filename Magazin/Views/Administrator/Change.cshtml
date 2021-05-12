@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Produs
+@{
     ViewData["Title"] = "Modifica produsul";
 }
 <head>
@@ -13,7 +14,8 @@
 <body class="bd-light" style="background-color: #333;">
     <div style="border:5px solid black;border-radius:10px;max-width:600px;background-color:white;min-width:400px;margin-left:21%">
         <form method="post" class="form-signin" style="width: 100%; max-width: 300px; padding: 15px; margin: 0 auto;" role="form" enctype="multipart/form-data">
-            <p> #Completeaza:</p>
+            <p> #Completeaza:</p
+            @Html.HiddenFor(model => model.Id)
 
             <div class="text-center">
                 <label for="Name">#Denumirea</label>

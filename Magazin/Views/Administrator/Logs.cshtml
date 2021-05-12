@@ -2,18 +2,43 @@
 @{
     ViewData["Title"] = "Pagina cu Loguri";
 }
-<h1 style="text-align:center">Cifrele reprezinta Data cind au fost adaugate</h1>
-<div class="row mt-10 mt-10" >
+<div class="container " style="background-color:rgb(255 ,255,255,0.8)">
+<h1 class="mt-5 pt-5 text-center text-danger font-weight-bold">Fisierele cu loguri</h1>
+<div class="row mt-10">
     @{
         foreach (var p in Model)
         {
-        <div class="col-lg-10" style="margin:10px; color:orangered;background-color: #333">
-            <h2>  @p.name</h2>
+            <div class="col-lg-2 m-3 p-1 text-center bg-dark text-white rounded" style="">
 
-            <p> @Html.ActionLink("Descarca", "DownloadFile", new { fileName = p.name })</p>
+                @{ string last = p.name;}
+                <h4>
+                    <b class="text-danger">Logul de pe data </b>
+                </h4>
+                <h4>
 
-        </div>
+                    @{for (int i = 62; i < 70; i++)
+                        {
+
+                            if (i == 66)
+                            {
+                                <b>-</b>
+                            }
+                            if (i == 68)
+                            {
+                                <b>-</b>
+                            }
+                            @last[i]
+
+                        }
+                    }
+                </h4>
+
+
+
+                <p> @Html.ActionLink("Descarca", "DownloadFile", new { fileName = p.name })</p>
+
+            </div>
         }
     }
-
+</div>
 </div>

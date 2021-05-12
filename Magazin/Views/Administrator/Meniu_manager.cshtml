@@ -3,31 +3,56 @@
 @{
     ViewData["Title"] = "Meniu Manager";
 }
-<div style="background-color: #333;">
-    <div class="row mt-5 mt-2" style="color: white;background-color: #333;">
+<p class="text-white font-weight-bold " style="text-align:center;font-size:40px">Colectia de produse</p>
+<div class="row mt-5 mt-2">
+    @{
+        foreach (var p in Model.viewProdus)
+        {
+            <div class="col-lg-4 mt-3  pb-5" style="">
 
-        @{
+                <div class=" text-dark p-3 pb-5" style="     background-color: rgba(255, 255, 255,0.7);
+        border-radius: 13px;
+    ">
+                    @{string denumire = p.Path + "" + p.Img;}
+                    <img class="img-thumbnail" src="@denumire" />
 
-            foreach (var p in Model.viewProdus)
-            {
+                    <div class="float-left text-danger mt-2"><p> &euro;@p.Price  </p></div>
 
-                {
+                    <div class=" text-center mt-2"><h4>@p.Name</h4></div>
+                    <div class="container text-secondary text-center" style="">
+                        <p>
+                            @p.Company
 
-                    <div class="col-lg-4">
-                        @{string denumire = p.Path + "" + p.Img;}
-                        <img class="img-thumbnail" src="@denumire" alt="@p.Name" />
-                        <h2>   @p.Name</h2>
-                        <p>Compania producator: @p.Company</p>
-                        <p>  @p.Price.ToString("c")</p>
-
-                        <p><a class="btn btn-warning" href="~/Administrator/Show/@p.Id"> Detalii</a></p>
 
 
                     </div>
+                    
 
-                }
-            }
+                    <div class="float-right overflow-auto">
+                        <a class="btn btn-dark" href="~/Administrator/Show/@p.Id"> 
+                            <img width="25" height="25" src="~/index/icons/view-details.png" style="filter:invert(1)" />
+                        </a>
+                    </div>
+                </div>
+
+            </div>
         }
+    }
 
-    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

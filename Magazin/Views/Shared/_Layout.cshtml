@@ -6,46 +6,58 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"]</title>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
-    <body>
-       
+    <body style=" background-image: 
+            url(/index/backgroundImg/play.jpg); 
+        background-position: center; background-size: cover; background-repeat: no-repeat;">
 
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">#GameStore#</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top  text-white bg-dark" style="">
+            <a class="navbar-brand text-white mr-5 ml-1 " style="font-size:20px" href="#">#GameStore 
+            <img src="~/menu/LinkIcons/console.png" width="35" height="35" style="filter:invert(1)"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarCollapse" aria-controls="navbarCollapse"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Visitator/Index">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link text-white mr-1 ml-1" href="~/Visitator/Index">Acasa
+                        <img src="~/menu/LinkIcons/house.png" width="25"height="25"style="filter:invert(1)"><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="~/Visitator/Meniu_Categorii">Categorii</a>
+                        <a class="nav-link text-white mr-1 ml-1" href="~/Visitator/Meniu_Categorii">
+                        Categorii <img src="~/menu/LinkIcons/list.png" width="25"height="25"style="filter:invert(1)"></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="~/Visitator/Favourite">Jocuri Top</a>
+                        <a class="nav-link text-white mr-1 ml-1" href="~/Visitator/Favourite">
+                        Jocuri Top<img src="~/menu/LinkIcons/heart.png" width="25" height="25"style=""></a>
                     </li>
-                    
+
 
                 </ul>
                 <ul class="navbar-nav ml-auto ">
                     <li class="nav-item">
-                        <a class="nav-link " href="~/Cos/Show">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <a class="nav-link text-white mr-1 ml-1" href="~/Cos/Show">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                             </svg>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="~/Visitator/Loghin">Log In</a>
+                        <a class="nav-link text-white mr-1 ml-1" href="~/Visitator/Loghin">
+                        <img src="~/menu/LinkIcons/log-in.png" width="25" height="25" style="filter:invert(1)"/></a>
                     </li>
                 </ul>
 
@@ -55,9 +67,99 @@
         <div class="container body-content">
             @RenderBody()
             <hr />
-            <footer>
-                <p>© 2021 - GameStore</p>
-            </footer>
+
         </div>
+        <footer class="rounded  border-light pt-4 bg-dark" style="margin:0px;padding:0px;">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-lg-2 text-center">
+                        <h4 class="text-white m-2">#GameStore</h4>
+                        <h6 class="text-light m-2">&copy; 2021 - #GameStore</h6>
+                    </div>
+                    <div class="col-lg-3  pb-3 text-center">
+                        <h4 class="text-white m-2"> Retele de socializare</h4>
+                        <h6 class="text-secondary" style="font-size:10px">
+                            Urmați-ne pe rețelele de socializare pentru a afla despre cele mai
+                            recente actualizări despre progresul nostru
+                        </h6>
+                        <div class="footer-social-links d-inline-flex">
+                            <a  href="#" class="m-1 fa fa-google" style="text-decoration:none">
+                                <img src="~/footer/SocialIcons/google-symbol.png" width="25" height="25" />
+                            </a>
+                            <a href="#" class="m-1 fa fa-linkedin" style="text-decoration:none">
+                                <img src="~/footer/SocialIcons/linkedin.png" width="25" height="25" />
+                            </a>
+                            <a href="#" class=" m-1 fa fa-youtube" style="text-decoration:none">
+                                <img src="~/footer/SocialIcons/youtube.png" width="25" height="25" />
+                            </a>
+                            <a href="#" class="m-1 fa fa-facebook" style="text-decoration:none">
+                                <img src="~/footer/SocialIcons/facebook.png" width="25" height="25" />
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <h4 class="text-white m-2">Informatie</h4>
+                        <h6 class="text-secondary m-2" style="font-size:13px;">FAQ</h6>
+                        <h6 class="text-secondary m-2" style="font-size:13px;">Centrul de ajutor</h6>
+                        <h6 class="text-secondary m-2" style="font-size:13px;">Contact</h6>
+                    </div>
+                    <div class="col-lg-2 ">
+                        <h4 class="text-white m-2">Companie</h4>
+                        <h6 class="text-secondary m-2" style="font-size:13px;">Despre noi</h6>
+                        <h6 class="text-secondary m-2" style="font-size:13px;">  Politica de Confidențialitate  </h6>
+                        <h6 class="text-secondary m-2" style="font-size:13px;">Termeni de utilizare</h6>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <h4 class="text-white m-2">Noi acceptam</h4>
+                        <img src="~/footer/CardIcons/visa.png" height="35" width="35" />
+                        <img src="~/footer/CardIcons/mastercard.png" height="35" width="35" />
+                        <img src="~/footer/CardIcons/paypal.png" height="35" width="35" />
+                        <img src="~/footer/CardIcons/maestro.png" height="35" width="35" />
+
+                    </div>
+                </div>
+
+                <div class="border-top text-secondary m-2"></div>
+                <h6 class="text-white " style="font-size:11px;">
+                    *Acceptând termenii acestei politici de confidențialitate,
+                    sunteți de acord cu prelucrarea datelor dvs. personale de către GameStore (și anume:
+                    colectarea, sistematizarea, acumularea, stocarea, clarificarea acestora (actualizare și modificare),
+                    extragere, utilizare, transfer (distribuție, furnizare, acces ), blocare, ștergere,
+                    depersonalizare, distrugere) în volumele și scopurile prevăzute în prezenta politică de
+                    confidențialitate, inclusiv transferul datelor dvs. personale către terți în cazurile și /
+                    sau în scopurile enumerate în această politică de confidențialitate.
+                    Stocăm datele dvs. personale atât timp cât
+                    avem o nevoie comercială rezonabilă de a stoca
+                    astfel de date în scopurile specificate în această Politică de Confidențialitate, 
+                    atât timp cât sunteți utilizator al site-ului web, aplicației și / sau serviciului
+                    sau atât timp cât este necesar sau permis în conformitate cu legislația aplicabilă
+                    (inclusiv, dar fără a se limita la, legile Federației Ruse, Republicii Letonia și),
+                    în special, în conformitate cu legile fiscale și contabile aplicabile, precum și în 
+                    conformitate cu normele dreptului internațional privat și public internațional.*
+
+
+
+                </h6>
+                <div class="row text-center pb-4 text-white">
+                    <div class="col-lg-2 m-3">
+                        <img src="~/footer/CompanyIcons/logo.png" width="100" height="100" />
+                    </div>
+                    <div class="col-lg-2 m-3">
+                        <img src="~/footer/CompanyIcons/acer.png" width="100" height="100" />
+                    </div>
+                    <div class="col-lg-2 m-3">
+                        <img src="~/footer/CompanyIcons/apple.png" width="100" height="100" />
+                    </div>
+                    <div class="col-lg-2 m-3">
+                        <img src="~/footer/CompanyIcons/nvidia.png" width="100" height="100"/>
+                    </div>
+                    <div class="col-lg-2 m-3">
+                        <img src="~/footer/CompanyIcons/cisco.png" width="100" height="100"/>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
     </body>
 </html>

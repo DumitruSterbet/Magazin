@@ -4,30 +4,106 @@
     ViewData["Title"] = "Cos";
 }
 
-<div class="row mt-12 mt-10" style="text-align:center">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/css/form.css" />
+</head>
+<div class="container bg-dark rounded">
+    <div class="row ">
+        <div class="col-lg-8 ">
+            <div class="row m-4" style="min-height:400px">
+                <div class="col-12">
+                    <div class="row border-bottom">
+                        <div class="col-10 text-center text-white"><h1>Cosul de produse</h1></div>
+                        <div class="col text-secondary "><br> <p>@Model.Count() items</p></div>
 
-    @{
-        foreach (var p in Model)
-        {
-            <div class="col-lg-10" style="background-color:dimgrey;color:yellow;border:5px solid black;">
-                <h2>  @p.Name</h2>
+                    </div>
+                </div><div></div>
+            @{int suma = 0; }
+                @{ if (Model.Any())
+                    {
+                        foreach (var p in Model)
+                        {
+                            suma = suma + p.Price;
+                            string cale = p.Path + "" + p.Img;
 
+                            <div class="row m-2 justify-content-around" style="max-height:120px">
+                                <div class="col-2 ">
+                                    <img class="w-100 h-100"   src="@cale" />
+                                </div>
+                                <div class="col-6 text-center ">
+                                    <h5 class="text-white text-center">@p.Name</h5>
+                                    <p class="text-center text-secondary">@p.Company</p>
+                                </div>
+                                <div class="col-2 text-center text-white">
+                                    <p>&euro; @p.Price</p>
+                                </div>
+                                <div class="col-2 text-right text-white">
+                                    <a href="~/cos/delete/@p.Id" onMouseOver="this.style.color='white'"
+                                       onMouseOut="this.style.color='gray'"> &#10005;</a>
+                                   
+                                </div>
+                               
+                            </div>
 
+                            
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 container  text-center p-1 text-white ">
+                            <p>Cosul Dvs este gol</p>
+                        </div>
+                    }
+                }
 
-                <p>  Pretul jocului : @p.Price.ToString("c")</p>
-                <p>
-
-                    <a class="btn btn-warning" href="~/Cos/Delete/@p.Id"> Sterge</a>
-                </p>
             </div>
-        }
-    }
+            
+            <div class="align-content-lg-end m-4"><a class="" href="~/visitator/index" onMouseOver="this.style.color='white'"
+                                       onMouseOut="this.style.color='gray'">&larr; Intoarce-te la produse</a></div>
+        </div>
+           
+        <div class="col-lg-4 bg-white rounded">
+            <div class="col border-bottom text-center"><h1>Sumarul</h1></div>
+            <div class="row">
+                <div class="col-5 mt-2 text-secondary"><h6>Suma totala </h6></div>
+                <div class="col-6 text-right mt-2 text-danger"><h6>&euro; @suma</h6></div></div>
+            <div class="row justify-content-center">
+                <form method="post" class="form-horizontal  col-10 justify-content-center " role="form">
+                    <div class="form-group text-center">
+                        <label for="User" class="col control-label text-secondary">Numele</label>
+                        <div class="col">
+                            <input type="text" name="User" class="form-control bg-dark text-white text-center" />
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <label for="Address" class="col control-label text-secondary">Adresa</label>
+                        <div class="col">
+                            <input type="text" name="Address" class="form-control bg-dark text-white" />
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <label class="col control-label text-secondary ">Nr. telefon</label>
+                        <div class="col">
+                            <input type="text" name="ContactPhone" class="form-control rounded bg-dark text-white" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group text-center">
+                        <div class="col">
+                            <input type="submit" class="btn btn-danger text-white" value="Cumpara" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+      
 
 
 
+    </div>
+ 
 </div>
-<div ><p>
-
-    <a class="btn btn-danger" style="margin:30px;" href="~/Cos/Buy"> Cumpara</a>
-</p></div>
 

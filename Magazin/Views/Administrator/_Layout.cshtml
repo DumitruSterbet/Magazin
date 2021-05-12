@@ -12,43 +12,181 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
-<body class="bd-light" style="background-color: darkorange">
+<body class="bd-light" style="background-image:
+            url(/index/backgroundImg/game.jpg);
+        background-position: center;background-size:cover;  background-repeat: repeat;">
 
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">©Admin Mode</a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-light text-dark">
+        <a class="navbar-brand text-dark font-weight-bold" href="#">©Admin Mode</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="~/Administrator/Meniu_manager">Home <span class="sr-only">(current)</span></a>
-                </li>
+            <ul class="navbar-nav mr-auto justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="~/Administrator/Add">Adauga Produs</a>
+                    <a class="nav-link text-dark font-weight-bold"
+                       href="~/Administrator/Meniu_manager">Acasa <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light  btn-sm font-weight-bold">Produse</button>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item text-dark font-weight-normal"
+                               href="~/Administrator/Meniu_manager">Meniu produse <span class="sr-only">(current)</span></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-dark " href="~/Administrator/Add">Adauga Produs</a>
+
+                        </div>
+
+                    </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="~/Administrator/Logs">Fisierul cu loguri</a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light  btn-sm font-weight-bold">Administrator</button>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+
+                            <a class="nav-link text-dark " href="~/Administrator/Logs">Fisierul cu loguri</a>
+                        </div>
+
+                    </div>
+
                 </li>
-            </ul>
-            <ul>
                 <li class="nav-item">
-                    <a class="nav-link" href="~/Visitator/Logout">Log Out</a>
+                <li>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light  btn-sm font-weight-bold">Cumparator</button>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item text-dark font-weight-normal"
+                               href="~/Administrator/orders">Ordere <span class="sr-only">(current)</span></a>
+
+
+                        </div>
+
+                    </div>
+                </li>
+
+
+
+
+            </ul>
+            <ul class=" navbar-nav float-left ">
+                <li class="nav-item">
+                    <a class="nav-link text-dark text-right font-weight-bold" href="~/Visitator/Logout">Log Out</a>
                 </li>
             </ul>
+
 
         </div>
     </nav><div style="margin-bottom:100px"></div>
     <!--основной контент-->
-    <div class="container body-content" style="border: 5px solid black; border-radius: 15px;background-color: #333;">
+    <div class="container body-content">
         @RenderBody()
         <hr />
 
     </div>
-    <footer class="text-center">
-        <p>© 2021 - GameStore</p>
+    <footer class="rounded  border-light pt-4 bg-light" style="margin:0px;padding:0px;">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 text-center">
+                    <h4 class="text-dark m-2">#GameStore</h4>
+                    <h6 class="text-dark m-2">&copy; 2021 - #GameStore</h6>
+                </div>
+                <div class="col-lg-3  pb-3 text-center">
+                    <h4 class="text-dark m-2"> Retele de socializare</h4>
+                    <h6 class="text-secondary" style="font-size:10px">
+                        Urmați-ne pe rețelele de socializare pentru a afla despre cele mai
+                        recente actualizări despre progresul nostru
+                    </h6>
+                    <div class="footer-social-links d-inline-flex">
+                        <a href="#" class="m-1 fa fa-google" style="text-decoration:none">
+                            <img src="~/footer/SocialIcons/google-symbol.png" width="25" height="25" />
+                        </a>
+                        <a href="#" class="m-1 fa fa-linkedin" style="text-decoration:none">
+                            <img src="~/footer/SocialIcons/linkedin.png" width="25" height="25" />
+                        </a>
+                        <a href="#" class=" m-1 fa fa-youtube" style="text-decoration:none">
+                            <img src="~/footer/SocialIcons/youtube.png" width="25" height="25" />
+                        </a>
+                        <a href="#" class="m-1 fa fa-facebook" style="text-decoration:none">
+                            <img src="~/footer/SocialIcons/facebook.png" width="25" height="25" />
+                        </a>
+
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h4 class="text-dark m-2">Informatie</h4>
+                    <h6 class="text-secondary m-2" style="font-size:13px;">FAQ</h6>
+                    <h6 class="text-secondary m-2" style="font-size:13px;">Centrul de ajutor</h6>
+                    <h6 class="text-secondary m-2" style="font-size:13px;">Contact</h6>
+                </div>
+                <div class="col-lg-2 ">
+                    <h4 class="text-dark m-2">Companie</h4>
+                    <h6 class="text-secondary m-2" style="font-size:13px;">Despre noi</h6>
+                    <h6 class="text-secondary m-2" style="font-size:13px;">  Politica de Confidențialitate  </h6>
+                    <h6 class="text-secondary m-2" style="font-size:13px;">Termeni de utilizare</h6>
+                </div>
+                <div class="col-lg-3 ">
+                    <h4 class="text-dark m-2">Noi acceptam</h4>
+                    <img src="~/footer/CardIcons/visa.png" height="35" width="35" />
+                    <img src="~/footer/CardIcons/mastercard.png" height="35" width="35" />
+                    <img src="~/footer/CardIcons/paypal.png" height="35" width="35" />
+                    <img src="~/footer/CardIcons/maestro.png" height="35" width="35" />
+
+                </div>
+            </div>
+
+            <div class="border-top text-secondary m-2"></div>
+            <h6 class="text-dark " style="font-size:11px;">
+                *Acceptând termenii acestei politici de confidențialitate,
+                sunteți de acord cu prelucrarea datelor dvs. personale de către GameStore (și anume:
+                colectarea, sistematizarea, acumularea, stocarea, clarificarea acestora (actualizare și modificare),
+                extragere, utilizare, transfer (distribuție, furnizare, acces ), blocare, ștergere,
+                depersonalizare, distrugere) în volumele și scopurile prevăzute în prezenta politică de
+                confidențialitate, inclusiv transferul datelor dvs. personale către terți în cazurile și /
+                sau în scopurile enumerate în această politică de confidențialitate.
+                Stocăm datele dvs. personale atât timp cât
+                avem o nevoie comercială rezonabilă de a stoca
+                astfel de date în scopurile specificate în această Politică de Confidențialitate,
+                atât timp cât sunteți utilizator al site-ului web, aplicației și / sau serviciului
+                sau atât timp cât este necesar sau permis în conformitate cu legislația aplicabilă
+                (inclusiv, dar fără a se limita la, legile Federației Ruse, Republicii Letonia și),
+                în special, în conformitate cu legile fiscale și contabile aplicabile, precum și în
+                conformitate cu normele dreptului internațional privat și public internațional.*
+
+
+
+            </h6>
+            <div class="row text-center pb-4 text-dark">
+                <div class="col-lg-2 m-3">
+                    <img src="~/footer/CompanyIcons/logo.png" width="100" height="100" />
+                </div>
+                <div class="col-lg-2 m-3">
+                    <img src="~/footer/CompanyIcons/acer.png" width="100" height="100" />
+                </div>
+                <div class="col-lg-2 m-3">
+                    <img src="~/footer/CompanyIcons/apple.png" width="100" height="100" />
+                </div>
+                <div class="col-lg-2 m-3">
+                    <img src="~/footer/CompanyIcons/nvidia.png" width="100" height="100" />
+                </div>
+                <div class="col-lg-2 m-3">
+                    <img src="~/footer/CompanyIcons/cisco.png" width="100" height="100" />
+                </div>
+            </div>
+        </div>
+
     </footer>
+
 </body>
 </html>

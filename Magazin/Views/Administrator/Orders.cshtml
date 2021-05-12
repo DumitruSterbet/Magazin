@@ -1,0 +1,20 @@
+﻿@using Magazin.JoinsModels
+@model IEnumerable<FullOrder>
+
+@{
+    ViewData["Title"] = "Meniu ordere";
+}
+<div class="container text-white text-center" style="background-color:rgba(255,255,255,0.7)">
+    <div class="row">
+        @{ foreach (var el in Model)
+            {<div class="col-2 m-3 p-2 text-center rounded bg-dark" style="">
+
+
+    <h2> Id: <b class="text-danger">@el.Id</b></h2>
+    <h4>Produs : <b class="text-danger">@el.Produs </b></h4>
+    <h6>Cumparator : <b class="text-primary"> @el.Order</b></h6>
+</div>
+            }
+        }
+    </div>
+</div>

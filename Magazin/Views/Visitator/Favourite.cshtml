@@ -2,27 +2,42 @@
 @{
     ViewData["Title"] = "Pagina De Baza";
 }
-<h1 style="text-align:center">Produsele favorite</h1>
+<p class="text-white" style="text-align:center;font-size:40px">Jocurile Favorite</p>
 <div class="row mt-5 mt-2">
     @{
         foreach (var p in Model)
         {
-        <div class="col-lg-4">
-            <h2>  @p.Name</h2>
-            @{string denumire = p.Path +""+ p.Img;}
-            <img class="img-thumbnail" src="@denumire" alt="@p.Name" />
+        <div class="col-lg-4 mt-3  pb-5" style="">
 
-            <p>Compania producator: @p.Company</p>
+            <div class=" text-white p-3 pb-5" style="        background-color: rgba(50,50,50,0.7);
+        border-radius: 13px;
+ ">
+                @{string denumire = p.Path + "" + p.Img;}
+                <img class="img-thumbnail" src="@denumire" />
+
+                <div class="float-left text-white mt-2"><p> &euro;@p.Price  </p></div>
+
+                <div class=" text-center mt-2"><h4>@p.Name</h4></div>
+                <div class="container text-white text-center" style="">
+                    <p>
+                        @p.Company
 
 
 
-            @if (@p.Favourite)
-            {<h3> <i class="fas fa-heart"></i></h3>}
-            <p>  Pretul jocului : @p.Price.ToString("c")</p>
-            <p>
-                <a class="btn btn-warning" href="~/Visitator/Buy/@p.Id"> Cumpara</a>
-                <a class="btn btn-warning" href="~/Visitator/Details/@p.Id"> Detalii</a>
-            </p>
+                </div>
+                <div class="float-left">
+                    <a class="btn btn-dark text-white" href="~/Cos/Add/@p.Id">
+                        <img width="25" height="25" src="~/index/icons/add-to-cart.png" style="filter:invert(1)" />
+                    </a>
+                </div>
+
+                <div class="float-right overflow-auto">
+                    <a class=" btn btn-danger text-white" href="~/Visitator/Details/@p.Id">
+                        <img width="25" height="25" src="~/index/icons/view-details.png" style="filter:invert(1)" />
+                    </a>
+                </div>
+            </div>
+
         </div>
         }
     }

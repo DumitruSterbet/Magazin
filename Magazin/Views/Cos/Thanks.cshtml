@@ -1,0 +1,36 @@
+﻿
+@{          ViewData["Tittle"] = "Mercy";
+}
+<div class="row justify-content-center">
+    <div class="container p-3 m-5 w-50 text-center justify-content-center" style="background-color:rgba(255,255,255,1);border-radius:40px;border:1px solid black">
+        <h1 class="m-5">Multumesc <b class="text-danger">@TempData["Message"]</b>  pentru cumparare </h1>
+        <h4 class="mt-5 text-secondary">Jocul tau este in cale spre tine </h4>
+        <h5 class="mb-5 text-secondary">Orderul tau a fost acceptat cu succes</h5>
+        <h5 class="mt-5  text-secondary">Urmareste-ne pe retele de socializare</h5>
+       
+        <div class="footer-social-links d-inline-flex">
+            <a href="#" class="m-1 fa fa-google" style="text-decoration:none">
+                <img src="~/footer/SocialIcons/google-symbol.png" width="40" height="40" />
+            </a>
+            <a href="#" class="m-1 fa fa-linkedin" style="text-decoration:none">
+                <img src="~/footer/SocialIcons/linkedin.png" width="40" height="40" />
+            </a>
+            <a href="#" class=" m-1 fa fa-youtube" style="text-decoration:none">
+                <img src="~/footer/SocialIcons/youtube.png" width="40" height="40" />
+            </a>
+            <a href="#" class="m-1 fa fa-facebook" style="text-decoration:none">
+                <img src="~/footer/SocialIcons/facebook.png" width="40" height="40" />
+            </a>
+
+        </div>
+        <a class="text-decoration-none" 
+           asp-action="index" asp-controller="visitator"><h6 data-toggle="tooltip" title="Acasa"
+                                                             class=" m-5 mb-1 text-danger " >
+            Intoarce-te la pagina de baza</h6></a>
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

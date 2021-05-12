@@ -53,31 +53,36 @@ namespace Magazin.Controllers
             return View();
         }
         [HttpPost]
-        public string Buy(Order order)
+        public IActionResult Show(Order order)
         {
+            
             db.Orders.Add(order);
             db.SaveChanges();
+          
             OrderProdus A = new OrderProdus();
-            ViewModel obj = new ViewModel();
-            obj.viewOrderProdus = new List<OrderProdus>();
-            int i = 0;
+            List<OrderProdus> obj = new List<OrderProdus>();
+           
+           
             foreach (var el in produse)
             {
-                obj.viewOrderProdus.Add(A);
-                obj.viewOrderProdus[i].ProdusId = el.Id;
-                obj.viewOrderProdus[i].OrderId = order.OrderId;
-                
-
-                db.OrdersProdus.Add(obj.viewOrderProdus[i]);
-
-
                
-                i++;
+               
+                A.ProdusId = el.Id;
+                A.OrderId = order.OrderId;
+                OrderProdus B = new OrderProdus { OrderId = A.OrderId, ProdusId = A.ProdusId };
+                db.OrdersProdus.Add(B);
+                db.SaveChanges();
+                TempData["Message"] = order.User;
             }
-            db.SaveChanges();
 
 
-            return "Multumesc, " + order.User + ", pentru cumparare!";
+
+            return RedirectToAction("Thanks");
+        }
+        public IActionResult Thanks()
+        {
+
+            return View();
         }
     }
 }

@@ -27,4 +27,12 @@
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\footer\CardIcons\" />
+    <Folder Include="wwwroot\footer\SocialIcons\" />
+    <Folder Include="wwwroot\index\backgroundImg\" />
+    <Folder Include="wwwroot\index\icons\" />
+    <Folder Include="wwwroot\menu\LinkIcons\" />
+  </ItemGroup>
+
 </Project>

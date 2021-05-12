@@ -108,7 +108,7 @@ namespace Magazin.Controllers
             ViewModel obj = new ViewModel();
             obj.viewAdmin = db.Admins.ToList();
             logger.LogInformation("Incercare de a se loga ca admin");
-            return View(obj);
+            return View(obj.viewAdmin[0]);
         }
 
 

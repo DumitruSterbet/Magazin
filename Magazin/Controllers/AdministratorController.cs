@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
+using Magazin.JoinsModels;
 
 namespace Magazin.Controllers
 {
@@ -109,15 +110,30 @@ namespace Magazin.Controllers
             logger.LogInformation($"Admin acceseaza desfasurat produsul cu id {id}");
             return View(v);
         }
+        public IActionResult Orders()
+        {
+
+            logger.LogInformation($"Admin incearca sa vada orderele");
+
+            List<FullOrder> obj = new List<FullOrder>();
+            obj = join();
+
+
+            return View(obj);
+        }
         [HttpGet]
         public IActionResult Change(int? id)
         {
             if (id == null) return RedirectToAction("Index");
-            ViewBag.ProdusId = id;
             logger.LogInformation($"Admin incearca sa modifice produsul cu id: {id}");
+            ViewBag.ProdusId = id;
+            Produs obj = new Produs();
+            obj = db.Produse.FirstOrDefault(u => u.Id == id);
+           
 
-            return View();
+            return View(obj);
         }
+       
 
         [HttpPost]// Modificarea produs
         public async Task<IActionResult> Change(IFormFile uploadedFile, Produs produs,int id)
@@ -146,10 +162,10 @@ namespace Magazin.Controllers
                     category = produs.category
 
                 };
-
-                Produs aux = new Produs();
-                aux = db.Produse.Find(id);
-                aux = obj;
+                Produs ob2 = db.Produse.Where(s => s.Id == produs.Id).FirstOrDefault();
+                db.Produse.Remove(ob2);
+                db.Produse.Add(obj);
+               
                 
                 db.SaveChanges();
             }
@@ -179,6 +195,37 @@ namespace Magazin.Controllers
             db.SaveChanges();
             logger.LogInformation($"Admin a sters produs cu Id {id}");
             return RedirectToAction("Meniu_manager");
+        }
+
+        public List<FullOrder> join()
+        {
+          
+
+            IEnumerable<OrderWithProdName> first = new List<OrderWithProdName>();
+            first = db.OrdersProdus.Join(db.Produse,
+                u => u.ProdusId,
+                p => p.Id,
+                (u, p) => new OrderWithProdName
+                { Id = u.Id, OrderId = u.OrderId, Order = u.Order, Produs = p.Name }
+
+                );
+            List<FullOrder>last =new List<FullOrder>();
+            last = first.Join(db.Orders,
+                p => p.OrderId,
+                u => u.OrderId,
+                (p, u) => new FullOrder
+                {Id=p.Id,
+                Produs=p.Produs,
+                Order=u.User
+
+                }
+                ).ToList(); 
+
+
+
+
+            return last;
+      
         }
 
 

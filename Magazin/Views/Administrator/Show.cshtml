@@ -3,32 +3,51 @@
 @{
     ViewData["Title"] = "Detalii Produs";
 }
-<div style="margin:100px;padding:10px;
-border:5px solid black;min-height:100px;padding:100px;border-radius:20px 20px; font-family: 'Sofia' ">
-    <div class="row mt-5 mt-5" style="color: blue;
-        min-height: 100px;
-        min-width: 100px">
+@{string denumire = Model.Path + "" + Model.Img;}
+<div style="        margin: 100px;
+        padding: 10px;
+       background-color:rgba(250,250,250,0.8);
 
-
-        @{ <div class="col-lg-16" style="color:white;
-        text-align: center;
         min-height: 100px;
-        min-width: 100px
+        padding: 75px;
+        border-radius: 20px 20px;
+
 ">
-    <h2>  @Model.Name</h2>
-    @{string denumire = Model.Path + "" + Model.Img;}
-    <img class="img-thumbnail" src="@denumire" alt="@Model.Name" />
-    <p>Compania producator: @Model.Company</p>
-    <p>@Model.Desc</p>
-    <p style="color:black;padding:10px;font-size:30px;font-style:italic">
-        Pretul jocului : @Model.Price.ToString("c")
+    <div class="row mt-5 " style="   color: white;
+        min-height: 100px;
+        min-width: 100px;
+        font-family: 'Roboto', sans-serif;
+    ">
+
+
+        @{ <div class="col-lg-6">
+
+
+                <img class="img-thumbnail" src="@denumire" alt="@Model.Name" />
+
+            </div>
+        }
+        @{ <div class="col-lg-6">
+    <h2 class="text-center text-dark font-weight-bold">  @Model.Name</h2>
+
+
+    <h4 class="text-center text-dark"> @Model.Company</h4>
+    <p class="text-center text-secondary">@Model.Desc</p>
+    <p class="text-center text-danger" style="font-size:20px">
+        Pretul jocului: @Model.Price &#128;
     </p>
-    <p><a class="btn btn-warning" href="~/Administrator/Meniu_manager"> Home</a></p>
-    <p><a class="btn btn-warning" href="~/Administrator/Change/@Model.Id"> Modifica</a></p>
-    <p><a class="btn btn-warning" href="~/Administrator/Delete/@Model.Id"> Sterge</a></p>
+    <p class="text-center">
+    <a class="btn btn-danger text-white" href="~/Administrator/Meniu_manager"> Acasa</a>
+   <a class="btn btn-danger text-white" href="~/Administrator/Change/@Model.Id"> Modifica</a>
+    <a class="btn btn-danger text-white" href="~/Administrator/Delete/@Model.Id"> Sterge</a>
+    
 </div>
         }
 
     </div>
 </div>
+
+
+
+
 
