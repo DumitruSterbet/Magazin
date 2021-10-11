@@ -75,18 +75,21 @@
                         <div class="col">
                             <input type="text" name="User" class="form-control bg-dark text-white text-center" />
                         </div>
+                        <div class="m-2"><h5 class="text-danger">@ViewBag.ErrUser</h5></div>
                     </div>
                     <div class="form-group text-center">
                         <label for="Address" class="col control-label text-secondary">Adresa</label>
                         <div class="col">
                             <input type="text" name="Address" class="form-control bg-dark text-white" />
                         </div>
+                        <div class="m-2"><h5 class="text-danger">@ViewBag.ErrAdress</h5></div>
                     </div>
                     <div class="form-group text-center">
                         <label class="col control-label text-secondary ">Nr. telefon</label>
                         <div class="col">
-                            <input type="text" name="ContactPhone" class="form-control rounded bg-dark text-white" />
+                            <input type="number" name="ContactPhone" class="form-control rounded bg-dark text-white" />
                         </div>
+                        <div class="m-2"><h5 class="text-danger">@ViewBag.ErrPhone</h5></div>
                     </div>
                     <br />
                     <div class="form-group text-center">

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using Magazin.JoinsModels;
+using Magazin.Security;
 
 namespace Magazin.Controllers
 {
@@ -45,38 +46,66 @@ namespace Magazin.Controllers
             return Content(User.Identity.Name);
         }
         [HttpPost]// Adaugarea Produs in BD
-        public async Task<IActionResult> Add(IFormFile uploadedFile,Produs produs)
+        public async Task<IActionResult> Add(IFormFile uploadedFile, Produs produs)
         {
-            if (uploadedFile != null)
+            if (securitProdus(produs) == true)
             {
-               
-                string path = "/img/Produse/" + uploadedFile.FileName;
-               
-                using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create))
+                if (uploadedFile != null)
                 {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-                string way = "/img/Produse/";
-                Produs file = new Produs { Img = uploadedFile.FileName, Path = way };
-                Produs obj = new Produs
-                {
-                    Name = produs.Name,
-                    Company = produs.Company,
-                    Desc = produs.Desc,
-                    Img = file.Img,
-                    Path = file.Path,
-                    Price = produs.Price,
-                    Favourite = produs.Favourite,
-                    categoryID = produs.categoryID,
-                    category = produs.category
 
-                };
-                db.Produse.Add(obj);
-                db.SaveChanges();
-            }
+                    string path = "/img/Produse/" + uploadedFile.FileName;
+
+                    using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create))
+                    {
+                        await uploadedFile.CopyToAsync(fileStream);
+                    }
+                    string way = "/img/Produse/";
+                    Produs file = new Produs { Img = uploadedFile.FileName, Path = way };
+                    Produs obj = new Produs
+                    {
+                        Name = produs.Name,
+                        Company = produs.Company,
+                        Desc = produs.Desc,
+                        Img = file.Img,
+                        Path = file.Path,
+                        Price = produs.Price,
+                        Favourite = produs.Favourite,
+                        categoryID = produs.categoryID,
+                        category = produs.category
+
+                    };
+                    db.Produse.Add(obj);
+                    db.SaveChanges();
+                }
+            
 
             logger.LogInformation("Admin a adaugat un nou produs");
             return RedirectToAction("Meniu_manager");
+        }return View();
+
+        }
+
+        public bool securitProdus(Produs produs)
+        {         
+                NotNull obj = new NotNull();
+                string k = obj.securitProdus(produs);
+                if (k.Contains("1"))
+                    ViewBag.ErrName = obj.errorMessage;
+                if (k.Contains("2"))
+                    ViewBag.ErrCompany = obj.errorMessage;
+                if (k.Contains("3"))
+                    ViewBag.ErrFavourite = obj.errorMessage;
+                if (k.Contains("4"))
+                    ViewBag.ErrCategory = obj.errorMessage;
+                if (k.Contains("5"))
+                    ViewBag.ErrPrice = obj.errorMessage;
+                if (k.Contains("6"))
+                    ViewBag.ErrDesc = obj.errorMessage;
+
+            
+            if (k == "")
+                    return true;
+                return false;            
         }
       
         [HttpGet]
@@ -115,7 +144,7 @@ namespace Magazin.Controllers
 
             logger.LogInformation($"Admin incearca sa vada orderele");
 
-            List<FullOrder> obj = new List<FullOrder>();
+            IEnumerable<FullOrder> obj = new List<FullOrder>();
             obj = join();
 
 
@@ -138,40 +167,48 @@ namespace Magazin.Controllers
         [HttpPost]// Modificarea produs
         public async Task<IActionResult> Change(IFormFile uploadedFile, Produs produs,int id)
         {
-            if (uploadedFile != null)
+            if (securitProdus(produs))
             {
-
-                string path = "/img/Produse/" + uploadedFile.FileName;
-
-                using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create))
+                if (uploadedFile != null)
                 {
-                    await uploadedFile.CopyToAsync(fileStream);
+
+                    string path = "/img/Produse/" + uploadedFile.FileName;
+
+                    using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create))
+                    {
+                        await uploadedFile.CopyToAsync(fileStream);
+                    }
+                    string way = "/img/Produse/";
+
+                    Produs obj = new Produs
+                    {
+                        Id = id,
+                        Name = produs.Name,
+                        Company = produs.Company,
+                        Desc = produs.Desc,
+                        Img = uploadedFile.FileName,
+                        Path = way,
+                        Price = produs.Price,
+                        Favourite = produs.Favourite,
+                        categoryID = produs.categoryID,
+                        category = produs.category
+
+                    };
+                    Produs ob2 = db.Produse.Where(s => s.Id == produs.Id).FirstOrDefault();
+                    db.Produse.Remove(ob2);
+                    db.Produse.Add(obj);
+
+
+                    db.SaveChanges();
                 }
-                string way = "/img/Produse/";
-                
-                Produs obj = new Produs
-                { Id = id,
-                    Name = produs.Name,
-                    Company = produs.Company,
-                    Desc = produs.Desc,
-                    Img = uploadedFile.FileName,
-                    Path = way,
-                    Price = produs.Price,
-                    Favourite = produs.Favourite,
-                    categoryID = produs.categoryID,
-                    category = produs.category
 
-                };
-                Produs ob2 = db.Produse.Where(s => s.Id == produs.Id).FirstOrDefault();
-                db.Produse.Remove(ob2);
-                db.Produse.Add(obj);
-               
-                
-                db.SaveChanges();
+                logger.LogInformation($"Admin a modificat produsul cu id {{id}}");
+                return RedirectToAction("Meniu_manager");
+
             }
-
-            logger.LogInformation($"Admin a modificat produsul cu id {{id}}");
-            return RedirectToAction("Meniu_manager");
+            Produs obj2 = new Produs();
+            obj2 = db.Produse.FirstOrDefault(u => u.Id == id);
+            return View(obj2);
         }
         [HttpGet]
         public IActionResult Add()
@@ -199,30 +236,27 @@ namespace Magazin.Controllers
 
         public List<FullOrder> join()
         {
-          
-
-            IEnumerable<OrderWithProdName> first = new List<OrderWithProdName>();
+             List<OrderWithProdName> first = new List<OrderWithProdName>();
             first = db.OrdersProdus.Join(db.Produse,
                 u => u.ProdusId,
                 p => p.Id,
                 (u, p) => new OrderWithProdName
                 { Id = u.Id, OrderId = u.OrderId, Order = u.Order, Produs = p.Name }
 
-                );
+                ).ToList();
+           // db.SaveChanges();
             List<FullOrder>last =new List<FullOrder>();
             last = first.Join(db.Orders,
                 p => p.OrderId,
                 u => u.OrderId,
                 (p, u) => new FullOrder
-                {Id=p.Id,
-                Produs=p.Produs,
-                Order=u.User
+                {
+                    Id = p.Id,
+                    Produs = p.Produs,
+                    Order = u.User
 
                 }
-                ).ToList(); 
-
-
-
+                ).ToList();
 
             return last;
       

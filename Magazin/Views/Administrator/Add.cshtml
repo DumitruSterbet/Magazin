@@ -21,37 +21,42 @@
                                 <label name="Name" class="control-label">Nume</label>
                                 <input type="text" name="Name" class="form-control" />
                             </div>
+                            <div class="m-2 text-center text-danger"><h5>@ViewBag.ErrName</h5></div>
                             <div class="form-group">
                                 <label name="Company" class="control-label">Companie</label>
                                 <input type="text" name="Company" class="form-control" />
                             </div>
+                            <div class="m-2 text-center text-danger"><h5>@ViewBag.ErrCompany</h5></div>
                             <div class="form-group">
                                 <label name="Price" class="control-label">Pret</label>
                                 <input type="number" name="Price" class="form-control" />
-                            </div><br />
-
+                            </div>
+                            <div class="m-2 text-center text-danger"><h5>@ViewBag.ErrPrice</h5></div><br />
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="Favourite" value="true">
                                 <label class="form-check-label" for="gridRadios1">
                                     Favorit
                                 </label>
                             </div>
+
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="Favourite" value="false" checked>
                                 <label class="form-check-label" for="gridRadios2">
                                     Nefavorit
                                 </label>
                             </div><br />
+                            <div class="m-2 text-center text-danger"><h5>@ViewBag.ErrFavourite</h5></div>
                             <div class="form-group " ng-app="myApp" ng-controller="customersCtrl">
 
-                                <select class="custom-select control-label border-0 "  name="categoryID">
+                                <select class="custom-select control-label border-0 " name="categoryID">
                                     <option selected>Categoria...</option>
                                     <option value="{{myData[0].id}}">{{myData[0].name}}</option>
                                     <option value="{{myData[0].id}}">{{myData[1].name}}</option>
                                     <option value="{{myData[0].id}}">{{myData[2].name}}</option>
                                 </select>
-<br>
+                                <br>
                             </div><br>
+                            <div class="m-2 text-center text-danger"><h5>@ViewBag.ErrCategory</h5></div>
                             <div class="form-group ">
                                 <label class="control-label" for="uploadedFile">Incarca imaginea</label>
 
@@ -64,9 +69,10 @@
                             <div class="form-group">
                                 <label name="Desc" class="control-label">Descriere</label>
 
-                                <textarea class="form-control z-depth-1 border-bottom rounded" name="Desc" 
+                                <textarea class="form-control z-depth-1 border-bottom rounded" name="Desc"
                                           id="exampleFormControlTextarea6" rows="8" placeholder="Adauga descrierea produsului..."></textarea>
                             </div>
+                            <div class="m-2 text-center text-danger"><h5>@ViewBag.ErrDesc</h5></div>
                         </div>
                     </div>
 
@@ -84,7 +90,7 @@
 <script>
     var app = angular.module('myApp', []);
     app.controller('customersCtrl', function ($scope, $http) {
-        $http.get("https://localhost:44399/api/jsonsCategory/").then(function (response) {
+        $http.get("https://magazin20211005230250.azurewebsites.net/api/jsonsCategory/").then(function (response) {
             $scope.myData = response.data;
 
         });

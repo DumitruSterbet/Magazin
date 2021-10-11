@@ -1,4 +1,5 @@
 ﻿using Magazin.Models;
+using Magazin.Security;
 using Magazin.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -55,30 +56,52 @@ namespace Magazin.Controllers
         [HttpPost]
         public IActionResult Show(Order order)
         {
-            
-            db.Orders.Add(order);
-            db.SaveChanges();
-          
-            OrderProdus A = new OrderProdus();
-            List<OrderProdus> obj = new List<OrderProdus>();
-           
-           
-            foreach (var el in produse)
+            if (produse != null)
             {
-               
-               
-                A.ProdusId = el.Id;
-                A.OrderId = order.OrderId;
-                OrderProdus B = new OrderProdus { OrderId = A.OrderId, ProdusId = A.ProdusId };
-                db.OrdersProdus.Add(B);
-                db.SaveChanges();
-                TempData["Message"] = order.User;
+                if (securitOrder(order))
+                {
+                    db.Orders.Add(order);
+                    db.SaveChanges();
+
+                    OrderProdus A = new OrderProdus();
+                    List<OrderProdus> obj = new List<OrderProdus>();
+
+
+                    foreach (var el in produse)
+                    {
+
+                        A.ProdusId = el.Id;
+                        A.OrderId = order.OrderId;
+                        OrderProdus B = new OrderProdus { OrderId = A.OrderId, ProdusId = A.ProdusId };
+                        db.OrdersProdus.Add(B);
+                        db.SaveChanges();
+                        TempData["Message"] = order.User;
+                    }
+
+                    produse = new List<Produs>();
+
+                    return RedirectToAction("Thanks");
+                }
             }
-
-
-
-            return RedirectToAction("Thanks");
+            return View(produse);
         }
+
+        public bool securitOrder(Order order)
+        {
+            NotNull obj = new NotNull();
+            string k=obj.securitOrder(order);
+            if (k.Contains("1"))
+                ViewBag.ErrUser = obj.errorMessage;
+            if (k.Contains("2"))
+                ViewBag.ErrAdress = obj.errorMessage;
+            if (k.Contains("3"))
+                ViewBag.ErrPhone = obj.errorMessage;
+            if (k =="")
+                return true;
+            return false;
+            
+        }
+
         public IActionResult Thanks()
         {
 

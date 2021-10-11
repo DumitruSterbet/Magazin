@@ -15,6 +15,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Magazin.Security;
 
 namespace Magazin.Controllers
 {
@@ -22,6 +23,7 @@ namespace Magazin.Controllers
     {
         ShopContext db;
         private readonly Microsoft.Extensions.Logging.ILogger logger;
+        public NotNull notNull = new NotNull();
 
         public VisitatorController(ShopContext context,ILogger<VisitatorController> _logger)
         {
@@ -117,19 +119,46 @@ namespace Magazin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Loghin(Admin ad)
         {
+            
             if (ModelState.IsValid)
             {
                 Admin user = await db.Admins.FirstOrDefaultAsync(u => u.login == ad.login && u.password == ad.password);
                 if (user != null)
                 {
-                    await Authenticate(ad.login); // аутентификация
+                    await Authenticate(ad.login);
 
                     return RedirectToAction("Meniu_manager", "Administrator");
                 }
                
             }
-            return RedirectToAction("Index","Visitator");
+            ErrorLoghin(ad);
+            
+            return View();
 
+        }
+        //Erori la logare
+        public void ErrorLoghin(Admin ad)
+        {
+            NotNull notNull = new NotNull();
+            int k = notNull.securitLoghin(ad);
+            if (k == 1)
+            {
+                ViewBag.Err1 = notNull.errorMessage;
+            }
+            if (k == 2)
+            {
+                ViewBag.Err2 = notNull.errorMessage;
+            }
+
+            if (k == 3)
+            {
+                ViewBag.Err1 = notNull.errorMessage;
+                ViewBag.Err2 = notNull.errorMessage;
+            }
+            if (k == 0)
+            {
+                ViewBag.Err = "Asa utilizator nu exista";
+            }
         }
         // Meniiu  categorii
         [HttpGet]
