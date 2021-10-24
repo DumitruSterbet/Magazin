@@ -110,7 +110,7 @@
 <script>
     var app = angular.module('myApp', []);
     app.controller('customersCtrl', function ($scope, $http) {
-        $http.get("https://magazin20211005230250.azurewebsites.net/api/jsons/").then(function (response) {
+        $http.get("https://localhost:44399/api/jsons/").then(function (response) {
             $scope.myData = response.data;
             $scope.SortP = false;
             $scope.Find = true;
