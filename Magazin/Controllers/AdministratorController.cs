@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using Magazin.JoinsModels;
 using Magazin.Security;
+using ClosedXML.Excel;
+using System.Data;
+using Magazin.Services;
 
 namespace Magazin.Controllers
 {
@@ -28,7 +31,7 @@ namespace Magazin.Controllers
             appEnvironment = _appEnvironment;
 
         }
-       
+
         // Produsele pentru manager
         [HttpGet]
         [Authorize]
@@ -77,37 +80,38 @@ namespace Magazin.Controllers
                     db.Produse.Add(obj);
                     db.SaveChanges();
                 }
-            
 
-            logger.LogInformation("Admin a adaugat un nou produs");
-            return RedirectToAction("Meniu_manager");
-        }return View();
+
+                logger.LogInformation("Admin a adaugat un nou produs");
+                return RedirectToAction("Meniu_manager");
+            }
+            return View();
 
         }
 
         public bool securitProdus(Produs produs)
-        {         
-                NotNull obj = new NotNull();
-                string k = obj.securitProdus(produs);
-                if (k.Contains("1"))
-                    ViewBag.ErrName = obj.errorMessage;
-                if (k.Contains("2"))
-                    ViewBag.ErrCompany = obj.errorMessage;
-                if (k.Contains("3"))
-                    ViewBag.ErrFavourite = obj.errorMessage;
-                if (k.Contains("4"))
-                    ViewBag.ErrCategory = obj.errorMessage;
-                if (k.Contains("5"))
-                    ViewBag.ErrPrice = obj.errorMessage;
-                if (k.Contains("6"))
-                    ViewBag.ErrDesc = obj.errorMessage;
+        {
+            NotNull obj = new NotNull();
+            string k = obj.securitProdus(produs);
+            if (k.Contains("1"))
+                ViewBag.ErrName = obj.errorMessage;
+            if (k.Contains("2"))
+                ViewBag.ErrCompany = obj.errorMessage;
+            if (k.Contains("3"))
+                ViewBag.ErrFavourite = obj.errorMessage;
+            if (k.Contains("4"))
+                ViewBag.ErrCategory = obj.errorMessage;
+            if (k.Contains("5"))
+                ViewBag.ErrPrice = obj.errorMessage;
+            if (k.Contains("6"))
+                ViewBag.ErrDesc = obj.errorMessage;
 
-            
+
             if (k == "")
-                    return true;
-                return false;            
+                return true;
+            return false;
         }
-      
+
         [HttpGet]
         public IActionResult Logs()
         {
@@ -119,7 +123,7 @@ namespace Magazin.Controllers
         public FileResult DownloadFile(string fileName)
         {
             //Build the File Path.
-            string path =  fileName;
+            string path = fileName;
 
             //Read the File data into Byte Array.
             byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -135,7 +139,7 @@ namespace Magazin.Controllers
             ViewModel obj = new ViewModel();
             obj.viewProdus = db.Produse.ToList();
             Produs v = new Produs();
-            v = obj.viewProdus.FirstOrDefault( x => x.Id == id);
+            v = obj.viewProdus.FirstOrDefault(x => x.Id == id);
             logger.LogInformation($"Admin acceseaza desfasurat produsul cu id {id}");
             return View(v);
         }
@@ -158,14 +162,14 @@ namespace Magazin.Controllers
             ViewBag.ProdusId = id;
             Produs obj = new Produs();
             obj = db.Produse.FirstOrDefault(u => u.Id == id);
-           
+
 
             return View(obj);
         }
-       
+
 
         [HttpPost]// Modificarea produs
-        public async Task<IActionResult> Change(IFormFile uploadedFile, Produs produs,int id)
+        public async Task<IActionResult> Change(IFormFile uploadedFile, Produs produs, int id)
         {
             if (securitProdus(produs))
             {
@@ -217,7 +221,7 @@ namespace Magazin.Controllers
             return View();
         }
 
-       
+
 
         // Stergerea produsului
         [HttpGet]
@@ -228,7 +232,7 @@ namespace Magazin.Controllers
             Produs A = new Produs();
             A = obj.viewProdus.FirstOrDefault(x => x.Id == id);
             db.Produse.Remove(A);
-           
+
             db.SaveChanges();
             logger.LogInformation($"Admin a sters produs cu Id {id}");
             return RedirectToAction("Meniu_manager");
@@ -236,7 +240,7 @@ namespace Magazin.Controllers
 
         public List<FullOrder> join()
         {
-             List<OrderWithProdName> first = new List<OrderWithProdName>();
+            List<OrderWithProdName> first = new List<OrderWithProdName>();
             first = db.OrdersProdus.Join(db.Produse,
                 u => u.ProdusId,
                 p => p.Id,
@@ -244,8 +248,8 @@ namespace Magazin.Controllers
                 { Id = u.Id, OrderId = u.OrderId, Order = u.Order, Produs = p.Name }
 
                 ).ToList();
-           // db.SaveChanges();
-            List<FullOrder>last =new List<FullOrder>();
+            // db.SaveChanges();
+            List<FullOrder> last = new List<FullOrder>();
             last = first.Join(db.Orders,
                 p => p.OrderId,
                 u => u.OrderId,
@@ -259,10 +263,51 @@ namespace Magazin.Controllers
                 ).ToList();
 
             return last;
-      
+
+        }
+        public async Task<IActionResult> SendMessage()
+        {
+            EmailService emailService = new EmailService();
+            await emailService.SendEmailAsync("d.sterbet@inbox.ru", "Bla", "Test");
+            return RedirectToAction("Index");
         }
 
+        public IActionResult Export()
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[4] { new DataColumn("Pret"),
+                                        new DataColumn("Denumire"),
+                                        new DataColumn("Companie"),
+                                        new DataColumn("Categorie") });
 
-       
+            var customers = db.Produse.Join(db.Categories,
+
+                u => u.categoryID,
+                p => p.Id,
+                (u, p) => new
+                {Name=u.Name,
+                    Price = u.Price,
+                    Company=u.Company,
+                    Category=p.Name
+        }
+             ).ToList();
+
+            foreach (var customer in customers)
+            {
+                dt.Rows.Add(customer.Price, customer.Name, customer.Company, customer.Category);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+                }
+            }
+
+
+        }
     }
 }

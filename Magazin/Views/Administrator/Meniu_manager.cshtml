@@ -3,43 +3,59 @@
 @{
     ViewData["Title"] = "Meniu Manager";
 }
-<p class="text-white font-weight-bold " style="text-align:center;font-size:40px">Colectia de produse</p>
-<div class="row mt-5 mt-2">
-    @{
-        foreach (var p in Model.viewProdus)
-        {
-            <div class="col-lg-4 mt-3  pb-5" style="">
+<div class="rounded m-5 " >
+    <div class="row justify-content-end m-2 text-right">
+        <div class="col-4  text-right"   >
+            <form method="post" asp-controller="Administrator" asp-action="Export">
+                <input type="submit" class="btn-dark text-white rounded" value="Export in XlSX" />
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-end m-2 text-right">
+        <div class="col-4 text-right" >
+            <form method="post" class="rounded" asp-controller="Administrator" asp-action="SendMessage">
+                <input type="submit" class="btn-dark text-white rounded" value="TestEmail" />
+            </form>
+        </div>
+    </div>
+</div>
+    <p class="text-white font-weight-bold " style="text-align:center;font-size:40px">Colectia de produse</p>
+    <div class="row mt-5 mt-2">
+        @{
+            foreach (var p in Model.viewProdus)
+            {
+                <div class="col-lg-4 mt-3  pb-5" style="">
 
-                <div class=" text-dark p-3 pb-5" style="     background-color: rgba(255, 255, 255,0.7);
+                    <div class=" text-dark p-3 pb-5" style="     background-color: rgba(255, 255, 255,0.7);
         border-radius: 13px;
     ">
-                    @{string denumire = p.Path + "" + p.Img;}
-                    <img class="img-thumbnail" src="@denumire" />
+                        @{string denumire = p.Path + "" + p.Img;}
+                        <img class="img-thumbnail" src="@denumire" />
 
-                    <div class="float-left text-danger mt-2"><p> &euro;@p.Price  </p></div>
+                        <div class="float-left text-danger mt-2"><p> &euro;@p.Price  </p></div>
 
-                    <div class=" text-center mt-2"><h4>@p.Name</h4></div>
-                    <div class="container text-secondary text-center" style="">
-                        <p>
-                            @p.Company
+                        <div class=" text-center mt-2"><h4>@p.Name</h4></div>
+                        <div class="container text-secondary text-center" style="">
+                            <p>
+                                @p.Company
 
 
 
+                        </div>
+
+
+                        <div class="float-right overflow-auto">
+                            <a class="btn btn-dark" href="~/Administrator/Show/@p.Id">
+                                <img width="25" height="25" src="~/index/icons/view-details.png" style="filter:invert(1)" />
+                            </a>
+                        </div>
                     </div>
-                    
 
-                    <div class="float-right overflow-auto">
-                        <a class="btn btn-dark" href="~/Administrator/Show/@p.Id"> 
-                            <img width="25" height="25" src="~/index/icons/view-details.png" style="filter:invert(1)" />
-                        </a>
-                    </div>
                 </div>
-
-            </div>
+            }
         }
-    }
 
-</div>
+    </div>
 
 
 
