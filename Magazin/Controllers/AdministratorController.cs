@@ -16,6 +16,8 @@ using Magazin.Security;
 using ClosedXML.Excel;
 using System.Data;
 using Magazin.Services;
+using System;
+using System.Net;
 
 namespace Magazin.Controllers
 {
@@ -266,10 +268,24 @@ namespace Magazin.Controllers
 
         }
         public async Task<IActionResult> SendMessage()
-        {
-            EmailService emailService = new EmailService();
-            await emailService.SendEmailAsync("d.sterbet@inbox.ru", "Bla", "Test");
-            return RedirectToAction("Index");
+        { string adress = "d.sterbet31@gmail.com";
+   
+            System.Net.WebClient client = new WebClient();
+            String htmlCode = client.DownloadString(@"C:\Users\AC Tech\Source\Repos\Magazin\Magazin\wwwroot\body.html");
+           
+           
+            try
+            {
+                EmailService emailService = new EmailService();
+                await emailService.SendEmailAsync(adress, "Test", htmlCode);
+                logger.LogInformation($"Mesajul s-a transmis la adresa: {adress}");
+            }
+            catch
+            {
+                logger.LogInformation($"Mesajul nu s-a putut transmite la adresa {adress}");
+
+            }
+            return RedirectToAction("Meniu_manager");
         }
 
         public IActionResult Export()

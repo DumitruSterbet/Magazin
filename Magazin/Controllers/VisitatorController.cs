@@ -91,6 +91,10 @@ namespace Magazin.Controllers
             logger.LogInformation("Metoda Categorii() a fost accesata");
             return View(ListA);
         }
+        public IActionResult workEmail()
+        {
+            return View();
+        }
         public IActionResult Details(int id)// Detaliile la un anumit produs
         {
             ViewModel obj = new ViewModel();

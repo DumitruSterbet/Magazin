@@ -63,7 +63,7 @@ namespace Magazin
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            loggerFactory.AddFile("C:/Users/dp61/source/repos/Magazin/Magazin/wwwroot/Logs/mylog.txt");
+            loggerFactory.AddFile("C:/Users/AC Tech/Source/Repos/Magazin/Magazin/wwwroot/Logs/mylog.txt");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseDefaultFiles();

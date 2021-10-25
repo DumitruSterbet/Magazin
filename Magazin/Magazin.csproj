@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <None Remove="Views\Jsons\Index.html" />
+    <None Remove="Views\Visitator\workEmail.html" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Views\Jsons\Index.html" />
+    <Content Include="Views\Visitator\workEmail.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +41,7 @@
     <Folder Include="wwwroot\footer\SocialIcons\" />
     <Folder Include="wwwroot\index\backgroundImg\" />
     <Folder Include="wwwroot\index\icons\" />
+    <Folder Include="wwwroot\Logs\" />
     <Folder Include="wwwroot\menu\LinkIcons\" />
   </ItemGroup>
 

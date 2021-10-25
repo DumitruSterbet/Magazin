@@ -43,7 +43,7 @@ namespace Magazin
 
                 if (!context.Logs.Any()) { 
                     // citirea fisierului cu loguri
-                    string[] entries = Directory.GetFileSystemEntries("C:/Users/dp61/source/repos/Magazin/Magazin/wwwroot/Logs/", "*", SearchOption.AllDirectories);
+                    string[] entries = Directory.GetFileSystemEntries("C:/Users/AC Tech/Source/Repos/Magazin/Magazin/wwwroot/Logs/", "*", SearchOption.AllDirectories);
                 
                 foreach (string el in entries)
                 {
